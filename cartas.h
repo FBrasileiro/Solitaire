@@ -43,3 +43,12 @@ int shuffle(Lista *l, int n)
     }
     return 0;
 }
+
+CARTAS retirar_topo(Lista *l)
+{
+    CARTAS carta = l->dados[l->ini];
+    l->ini++;
+    // printf("%i - ", l->ini);
+    // imprimir_lista(l);
+    return carta;
+}

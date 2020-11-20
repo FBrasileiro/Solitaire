@@ -6,12 +6,14 @@
 
 typedef struct
 {
-    char dados[4];
+    short visivel;
+    char carta[4];
 } CARTAS;
 
 typedef struct
 {
     int cont;
+    int ini;
     CARTAS dados[MAX];
 } Lista;
 
@@ -21,6 +23,7 @@ Lista *criar_lista()
     if (l != NULL)
     {
         l->cont = 0;
+        l->ini = 0;
     }
     return l;
 }
@@ -41,8 +44,9 @@ int lista_esta_cheia(Lista *l)
 
 int inserir_inicio_lista(Lista *l, char d[4])
 {
-    CARTAS carta;
-    strcpy(carta.dados, d);
+    CARTAS cartas;
+    strcpy(cartas.carta, d);
+    cartas.visivel = 0;
     if (l == NULL)
         return 0;
     if (lista_esta_cheia(l))
@@ -51,15 +55,15 @@ int inserir_inicio_lista(Lista *l, char d[4])
     {
         l->dados[i + 1] = l->dados[i];
     }
-    l->dados[0] = carta;
+    l->dados[0] = cartas;
     l->cont++;
     return 1;
 }
 
 int inserir_meio_lista(Lista *l, char d[4], int pos)
 {
-    CARTAS carta;
-    strcpy(carta.dados, d);
+    CARTAS cartas;
+    strcpy(cartas.carta, d);
     if (l == NULL)
         return 0;
     if (lista_esta_cheia(l))
@@ -68,30 +72,31 @@ int inserir_meio_lista(Lista *l, char d[4], int pos)
     {
         l->dados[i + 1] = l->dados[i];
     }
-    l->dados[pos] = carta;
+    l->dados[pos] = cartas;
     l->cont++;
     return 1;
 }
 
 int inserir_fim_lista(Lista *l, char d[4])
 {
-    CARTAS carta;
-    strcpy(carta.dados, d);
+    CARTAS cartas;
+    strcpy(cartas.carta, d);
     if (l == NULL)
         return 0;
     if (lista_esta_cheia(l))
         return 0;
-    l->dados[l->cont] = carta;
+    l->dados[l->cont] = cartas;
     l->cont++;
     return 1;
 }
 
 void imprimir_lista(Lista *l)
 {
-    for (int i = 0; i < l->cont; i++)
+    for (int i = l->ini; i < 54; i++)
     {
-        printf("%s ", l->dados[i].dados);
+        printf("%s ", l->dados[i].carta);
     }
+    printf("\n");
 }
 
 void destruir_lista(Lista *l)
