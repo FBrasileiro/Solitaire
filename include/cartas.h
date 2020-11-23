@@ -1,3 +1,6 @@
+#ifndef CARTAS_H
+#define CARTAS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -24,13 +27,9 @@ Lista *criar_cartas()
 void swap(Lista *l, int i, int j)
 {
     CARTAS aux = l->dados[i];
-    // strcpy(aux, l->dados[i]);
-    // printf("I - %i - %s     ", i, l->dados[i].dados);
+
     l->dados[i] = l->dados[j];
-    // printf("%i - %s\n", i, l->dados[i].dados);
-    // printf("J - %i - %s     ", j, l->dados[j].dados);
     l->dados[j] = aux;
-    // printf("%i - %s\n\n", j, l->dados[j].dados);
 }
 
 int shuffle(Lista *l, int n)
@@ -48,7 +47,7 @@ CARTAS retirar_topo(Lista *l)
 {
     CARTAS carta = l->dados[l->ini];
     l->ini++;
-    // printf("%i - ", l->ini);
-    // imprimir_lista(l);
     return carta;
 }
+
+#endif
