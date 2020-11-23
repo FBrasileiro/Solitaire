@@ -7,6 +7,7 @@
 #include "include/cartas.h"
 #include "include/config.h"
 
+//eu estive aqui 
 using namespace std;
 
 int main()
