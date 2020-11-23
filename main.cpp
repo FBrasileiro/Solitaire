@@ -7,6 +7,7 @@
 #include "include/cartas.h"
 #include "include/config.h"
 
+// aaa
 using namespace std;
 
 int main()
