@@ -7,18 +7,13 @@
 #include "include/cartas.h"
 #include "include/config.h"
 
-//eu estive aqui
-
-// eu tembem
 using namespace std;
 
 int main()
 {
     Lista *cartas = criar_cartas();
     vector<stack<CARTAS>> colunas;
-    CARTAS carta;
     shuffle(cartas, 52);
-
     gerar_colunas(cartas, colunas);
     print_colunas(colunas);
 
