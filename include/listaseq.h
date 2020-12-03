@@ -1,14 +1,23 @@
+#ifndef LISTASEQ_H
+#define LISTASEQ_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
-
-#define MAX 53
+#include <string>
 
 typedef struct
 {
     short visivel;
-    char carta[4];
+    int valor;
+    char tipo; // e, c, p, o
+    char cor;  // P ou V
+
 } CARTAS;
+
+using namespace std;
+
+#define MAX 53
 
 typedef struct
 {
@@ -42,10 +51,12 @@ int lista_esta_cheia(Lista *l)
     return l->cont == MAX;
 }
 
-int inserir_inicio_lista(Lista *l, char d[4])
+int inserir_inicio_lista(Lista *l, int valor, char tipo, char cor)
 {
     CARTAS cartas;
-    strcpy(cartas.carta, d);
+    cartas.valor = valor;
+    cartas.tipo = tipo;
+    cartas.cor = cor;
     cartas.visivel = 0;
     if (l == NULL)
         return 0;
@@ -60,10 +71,12 @@ int inserir_inicio_lista(Lista *l, char d[4])
     return 1;
 }
 
-int inserir_meio_lista(Lista *l, char d[4], int pos)
+int inserir_meio_lista(Lista *l, int valor, char tipo, char cor, int pos)
 {
     CARTAS cartas;
-    strcpy(cartas.carta, d);
+    cartas.valor = valor;
+    cartas.tipo = tipo;
+    cartas.cor = cor;
     if (l == NULL)
         return 0;
     if (lista_esta_cheia(l))
@@ -77,10 +90,12 @@ int inserir_meio_lista(Lista *l, char d[4], int pos)
     return 1;
 }
 
-int inserir_fim_lista(Lista *l, char d[4])
+int inserir_fim_lista(Lista *l, int valor, char tipo, char cor)
 {
     CARTAS cartas;
-    strcpy(cartas.carta, d);
+    cartas.valor = valor;
+    cartas.tipo = tipo;
+    cartas.cor = cor;
     if (l == NULL)
         return 0;
     if (lista_esta_cheia(l))
@@ -94,7 +109,7 @@ void imprimir_lista(Lista *l)
 {
     for (int i = l->ini; i < 54; i++)
     {
-        printf("%s ", l->dados[i].carta);
+        cout << l->dados[i].valor << l->dados[i].tipo << " ";
     }
     printf("\n");
 }
@@ -103,3 +118,5 @@ void destruir_lista(Lista *l)
 {
     free(l);
 }
+
+#endif

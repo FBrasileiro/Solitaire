@@ -6,19 +6,19 @@
 #include <time.h>
 #include "listaseq.h"
 
+using namespace std;
+
 Lista *criar_cartas()
 {
     Lista *cartas = criar_lista();
-    char carta[4];
-    char *numeros[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    char *tipo[] = {"e", "o", "c", "p"};
+    int valor;
+    char tipo[] = {'e', 'o', 'p', 'c'};
+
     for (int j = 0; j < 4; j++)
     {
-        for (int i = 0; i < 13; i++)
+        for (int i = 1; i <= 13; i++)
         {
-            strcpy(carta, numeros[i]);
-            strcat(carta, tipo[j]);
-            inserir_fim_lista(cartas, carta);
+            inserir_fim_lista(cartas, i, tipo[j], (j % 2 ? 'v' : 'p'));
         }
     }
     return cartas;
@@ -47,6 +47,7 @@ CARTAS retirar_topo(Lista *l)
 {
     CARTAS carta = l->dados[l->ini];
     l->ini++;
+    l->cont--;
     return carta;
 }
 
