@@ -92,13 +92,4 @@ void print_ganhou()
     cout << "|------------------------------|" << endl;
 }
 
-void print_perdeu()
-{
-    cout << "\n"
-         << endl;
-    cout << "|---------------------------------|" << endl;
-    cout << "| Infelizmente você perdeu o jogo |" << endl;
-    cout << "|---------------------------------|" << endl;
-}
-
 #endif

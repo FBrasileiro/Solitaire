@@ -147,7 +147,9 @@ void puxar_carta_cave(vector<stack<CARTAS>> &cave)
 {
     if (cave[0].empty() && cave[1].empty())
     {
+        limpaTela();
         cout << "O cave nao tem mais cartas" << endl;
+        delay05();
         return;
     }
     if (!cave[1].empty())
@@ -226,7 +228,6 @@ int possivel_empilhar(CARTAS carta, stack<CARTAS> coluna_alvo)
             return 1;
         return 0;
     }
-
     CARTAS carta2 = coluna_alvo.top();
     // printf("%c - %c\n", carta.cor, carta2.cor);
     if (carta.cor == carta2.cor || carta.valor != carta2.valor - 1)

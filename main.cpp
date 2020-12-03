@@ -35,6 +35,7 @@ int main()
             print_ganhou();
             break;
         }
+
         limpaTela();
         print_colunas(colunas);
         apresentar_carta_cave(cave);
