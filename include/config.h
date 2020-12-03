@@ -11,67 +11,6 @@
 #include "cartas.h"
 
 using namespace std;
-void gerar_colunas(Lista *cartas, vector<stack<CARTAS>> &colunas)
-{
-    for (int i = 1; i < 8; i++)
-    {
-        stack<CARTAS> aux;
-        CARTAS aux_c;
-        for (int j = 0; j < i; j++)
-        {
-            aux_c = retirar_topo(cartas);
-            aux_c.visivel = 2;
-            aux.push(aux_c);
-        }
-        colunas.push_back(aux);
-    }
-
-    for (int i = 0; i < 7; i++)
-    {
-        colunas[i].top().visivel = 1;
-    }
-}
-
-void gerar_pilhas_finais(vector<stack<CARTAS>> &pilhas_finais)
-{
-    for (int i = 0; i < 4; i++)
-    {
-        stack<CARTAS> p_cartas;
-        pilhas_finais.push_back(p_cartas);
-    }
-}
-
-void gerar_bolo_cave(Lista *cartas, vector<stack<CARTAS>> &cave)
-{
-    stack<CARTAS> bolo;
-    CARTAS aux;
-    cave.push_back(bolo); // empurra a pilha vazia para o cave
-    for (int i = 0; i < cartas->cont; i++)
-    {
-        aux = retirar_topo(cartas);
-        aux.visivel = 1;
-        bolo.push(aux);
-    }
-    cave.push_back(bolo);
-}
-
-void puxar_carta_cave(vector<stack<CARTAS>> &cave)
-{
-    if (!cave[1].empty())
-    {
-
-        cave[0].push(cave[1].top());
-        cave[1].pop();
-    }
-    else
-    {
-        for (int i = cave[0].size(); i > 0; i--)
-        {
-            cave[1].push(cave[0].top());
-            cave[0].pop();
-        }
-    }
-}
 
 void print_carta(CARTAS carta, char EOL)
 {
@@ -105,6 +44,115 @@ void print_carta(CARTAS carta, char EOL)
     {
         cout << " "
              << EOL;
+    }
+}
+
+void gerar_colunas(Lista *cartas, vector<stack<CARTAS>> &colunas)
+{
+    for (int i = 1; i < 8; i++)
+    {
+        stack<CARTAS> aux;
+        CARTAS aux_c;
+        for (int j = 0; j < i; j++)
+        {
+            aux_c = retirar_topo(cartas);
+            aux_c.visivel = 2;
+            aux.push(aux_c);
+        }
+        colunas.push_back(aux);
+    }
+
+    for (int i = 0; i < 7; i++)
+    {
+        colunas[i].top().visivel = 1;
+    }
+}
+
+void gerar_pilhas_finais(vector<stack<CARTAS>> &pilhas_finais)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        stack<CARTAS> p_cartas;
+        pilhas_finais.push_back(p_cartas);
+    }
+}
+
+void add_pilhas_final(stack<CARTAS> &pilha, stack<CARTAS> &coluna)
+{
+    // cout << coluna.top().valor << endl;
+    CARTAS aux;
+    if (pilha.empty()) //caso seja a primeira carta na pilha
+        if (coluna.top().valor == 1)
+        {
+            // cout << "IF IF" << endl;
+            aux = coluna.top();
+            coluna.top().visivel = 0;
+            pilha.push(aux); //empilha
+            coluna.pop();
+        }
+        else
+            return;
+    else if (coluna.top().valor == pilha.top().valor + 1) //caso n for a primeira carta na pilha
+    {
+        // cout << "ELSE IF" << endl;
+        aux = coluna.top();
+        coluna.top().visivel = 0;
+        pilha.push(coluna.top()); //empilha
+        coluna.pop();
+    }
+    else
+    {
+        cout << "IMPOSSIVEL" << endl;
+    }
+}
+
+void apresentar_pilhas_finais(vector<stack<CARTAS>> pilhas_finais)
+{
+    string cartas[5] = {"Copas", "Espadas", "Paus", "Ouros"};
+    for (int i = 0; i < pilhas_finais.size(); i++)
+    {
+        cout << cartas[i] << ": ";
+        if (pilhas_finais[i].empty())
+            cout << "* ";
+        else
+            print_carta(pilhas_finais[i].top(), ' ');
+    }
+    cout << endl;
+}
+
+void gerar_bolo_cave(Lista *cartas, vector<stack<CARTAS>> &cave)
+{
+    stack<CARTAS> bolo;
+    CARTAS aux;
+    cave.push_back(bolo); // empurra a pilha vazia para o cave
+    for (int i = 0; i < cartas->cont; i++)
+    {
+        aux = retirar_topo(cartas);
+        aux.visivel = 1;
+        bolo.push(aux);
+    }
+    cave.push_back(bolo);
+}
+
+void puxar_carta_cave(vector<stack<CARTAS>> &cave)
+{
+    if (cave[0].empty() && cave[1].empty())
+    {
+        cout << "O cave nao tem mais cartas" << endl;
+        return;
+    }
+    if (!cave[1].empty())
+    {
+        cave[0].push(cave[1].top());
+        cave[1].pop();
+    }
+    else
+    {
+        for (int i = cave[0].size(); i > 0; i--)
+        {
+            cave[1].push(cave[0].top());
+            cave[0].pop();
+        }
     }
 }
 
