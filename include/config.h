@@ -8,6 +8,7 @@
 #include <stack>
 #include <string>
 #include <vector>
+#include "interacoes.h"
 #include "cartas.h"
 
 using namespace std;
@@ -102,7 +103,9 @@ void add_pilhas_final(stack<CARTAS> &pilha, stack<CARTAS> &coluna)
     }
     else
     {
-        cout << "IMPOSSIVEL" << endl;
+        limpaTela();
+        cout << "Impossivel realizar essa acao" << endl;
+        delay05();
     }
 }
 
@@ -234,11 +237,12 @@ int possivel_empilhar(CARTAS carta, stack<CARTAS> coluna_alvo)
 void movimenta_cartas(stack<CARTAS> &coluna, int index, stack<CARTAS> &coluna_alvo)
 {
     CARTAS carta_desejada = visualizar_carta(coluna, index);
-    cout << "CARTA DESEJADA: " << carta_desejada.valor << " - VISIVEL: " << carta_desejada.visivel << endl;
     stack<CARTAS> aux;
     if (carta_desejada.visivel == 2 || !possivel_empilhar(carta_desejada, coluna_alvo))
     {
-        cout << "Impossivel" << endl;
+        limpaTela();
+        cout << "Impossivel realizar essa acao" << endl;
+        delay05();
         return;
     }
     int c = 0;
@@ -250,13 +254,11 @@ void movimenta_cartas(stack<CARTAS> &coluna, int index, stack<CARTAS> &coluna_al
         coluna.pop();
         c++;
     }
-    cout << "TAMANHO AUX: " << aux.size() << endl;
     for (int i = 0; i <= c; i++)
     {
         if (aux.empty() && i != 0)
             break;
         coluna_alvo.push(aux.top());
-        cout << i << " - EM AUX: " << aux.top().valor << endl;
         aux.pop();
     }
 }

@@ -1,17 +1,24 @@
 #ifndef INTERACOES_H
 #define INTERACOES_H
 #include <iostream>
-#include "config.h"
 
 #if defined(__APPLE__) || defined(__linux__)
 #define limpaTela()      \
     {                    \
         system("clear"); \
     }
-#define limpaTelaDelay()   \
+#define delay()            \
     {                      \
         system("sleep 3"); \
-        limpaTela();       \
+    }
+#define delay05()          \
+    {                      \
+        system("sleep 1"); \
+    }
+#define limpaTelaDelay() \
+    {                    \
+        delay();         \
+        limpaTela();     \
     }
 
 #elif defined(_WIN32) || defined(_WIN64)
@@ -20,12 +27,21 @@
     {                  \
         system("cls"); \
     }
+#define delay()      \
+    {                \
+        Sleep(2000); \
+    }
+#define delay05()    \
+    {                \
+        Sleep(1000); \
+    }
 #define limpaTelaDelay() \
     {                    \
-        Sleep(2);        \
+        delay();         \
         limpaTela();     \
     }
 #endif
+#include "config.h"
 
 using namespace std;
 

@@ -24,7 +24,10 @@ int main()
     char acao;
     int col, index, alvo;
     int u_cave;
+    limpaTela();
     printLogo();
+    cout << "Gerando cartas..." << endl;
+    delay();
     while (1)
     {
         if (verificar_se_ganhou(pilhas_finais))
@@ -32,7 +35,7 @@ int main()
             print_ganhou();
             break;
         }
-        // limpaTela();
+        limpaTela();
         print_colunas(colunas);
         apresentar_carta_cave(cave);
         apresentar_pilhas_finais(pilhas_finais);
@@ -40,6 +43,8 @@ int main()
 
         cout << "Escreva: ";
         cin >> acao;
+        limpaTela();
+        print_colunas(colunas);
         switch (acao)
         {
         case 'A':
@@ -48,8 +53,6 @@ int main()
             break;
         case 'B':
 
-            limpaTela();
-            print_colunas(colunas);
             cout << "De qual pilha deseja retirar a carta?" << endl;
             cin >> col;
             cout << "Qual a posicao da carta?" << endl;
@@ -64,17 +67,21 @@ int main()
             cout << endl;
             if (cave[0].empty() && cave[1].empty())
             {
+                limpaTela();
                 cout << "O cave nao tem mais cartas" << endl;
+                delay05();
                 break;
             }
 
             cout << "De qual pilha deseja retirar a carta?" << endl;
             cout << "[1] - Bolo" << endl;
-            cout << "[2] - Retiradas" << endl;
+            cout << "[0] - Retiradas" << endl;
             cin >> u_cave;
             if (u_cave > cave.size() || cave[u_cave].empty())
             {
+                limpaTela();
                 cout << "Nao existem cartas ai" << endl;
+                delay05();
                 break;
             }
             cout << "Em qual pilha deseja colocar a carta?" << endl;
@@ -88,7 +95,9 @@ int main()
             cin >> col;
             if (colunas[col - 1].empty())
             {
+                limpaTela();
                 cout << "Nao existem cartas ai" << endl;
+                delay();
                 break;
             }
             switch (colunas[col - 1].top().tipo)
@@ -112,7 +121,9 @@ int main()
             cout << endl;
             if (cave[0].empty() && cave[1].empty())
             {
+                limpaTela();
                 cout << "O cave nao tem mais cartas" << endl;
+                delay();
                 break;
             }
 
@@ -122,7 +133,9 @@ int main()
             cin >> u_cave;
             if (u_cave > cave.size() || cave[u_cave].empty())
             {
+                limpaTela();
                 cout << "Nao existem cartas ai" << endl;
+                delay();
                 break;
             }
 
@@ -144,7 +157,9 @@ int main()
 
             break;
         default:
+            limpaTela();
             cout << "Opcao invalida, tente novamente" << endl;
+            delay05();
         }
     }
 
