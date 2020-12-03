@@ -39,6 +39,10 @@ int main()
     int u_cave;
     while (1)
     {
+        if (verificar_se_ganhou(pilhas_finais))
+        {
+            print_ganhou();
+        }
         // limpaTela();
         print_colunas(colunas);
         apresentar_carta_cave(cave);

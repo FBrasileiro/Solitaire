@@ -124,8 +124,9 @@ void gerar_bolo_cave(Lista *cartas, vector<stack<CARTAS>> &cave)
 {
     stack<CARTAS> bolo;
     CARTAS aux;
+    int cont = cartas->cont;
     cave.push_back(bolo); // empurra a pilha vazia para o cave
-    for (int i = 0; i < cartas->cont; i++)
+    for (int i = 0; i < cont; i++)
     {
         aux = retirar_topo(cartas);
         aux.visivel = 1;
@@ -253,6 +254,17 @@ void movimenta_cartas(stack<CARTAS> &coluna, int index, stack<CARTAS> &coluna_al
         cout << i << " - EM AUX: " << aux.top().valor << endl;
         aux.pop();
     }
+}
+
+int verificar_se_ganhou(vector<stack<CARTAS>> lista)
+{
+    CARTAS aux;
+    for (int i = 0; i < 4; i++) //se as pilhas finais estiverem com1 13 cartas
+    {
+        if (lista[i].size() != 13)
+            return 0;
+    }
+    return 1;
 }
 
 #endif

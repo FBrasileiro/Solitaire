@@ -17,7 +17,7 @@ typedef struct
 
 using namespace std;
 
-#define MAX 53
+#define MAX 54
 
 typedef struct
 {
