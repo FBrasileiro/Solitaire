@@ -8,19 +8,6 @@
 #include "include/cartas.h"
 #include "include/config.h"
 
-#if defined(__APPLE__) || defined(__linux__)
-#define limpaTela()      \
-    {                    \
-        system("clear"); \
-    }
-
-#elif defined(_WIN32) || defined(_WIN64)
-#define limpaTela()    \
-    {                  \
-        system("cls"); \
-    }
-#endif
-
 using namespace std;
 
 int main()
@@ -37,11 +24,13 @@ int main()
     char acao;
     int col, index, alvo;
     int u_cave;
+    printLogo();
     while (1)
     {
         if (verificar_se_ganhou(pilhas_finais))
         {
             print_ganhou();
+            break;
         }
         // limpaTela();
         print_colunas(colunas);

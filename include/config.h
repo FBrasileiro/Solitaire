@@ -112,10 +112,15 @@ void apresentar_pilhas_finais(vector<stack<CARTAS>> pilhas_finais)
     for (int i = 0; i < pilhas_finais.size(); i++)
     {
         cout << cartas[i] << ": ";
+        cout << "[ ";
         if (pilhas_finais[i].empty())
-            cout << "* ";
+            cout << "*";
         else
-            print_carta(pilhas_finais[i].top(), ' ');
+        {
+            pilhas_finais[i].top().visivel = 1;
+            print_carta(pilhas_finais[i].top(), '\0');
+        }
+        cout << " ] ";
     }
     cout << endl;
 }
