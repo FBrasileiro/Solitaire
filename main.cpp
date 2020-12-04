@@ -7,27 +7,47 @@
 #include "include/interacoes.h"
 #include "include/cartas.h"
 #include "include/config.h"
+#include "include/apresentacao.h"
 
 using namespace std;
 
 int main()
 {
-    Lista *cartas = criar_cartas();
     vector<stack<CARTAS>> colunas;
     vector<stack<CARTAS>> pilhas_finais;
     vector<stack<CARTAS>> cave;
+    Lista *cartas;
 
-    shuffle(cartas, 52);
-    gerar_colunas(cartas, colunas);
-    gerar_bolo_cave(cartas, cave);
-    gerar_pilhas_finais(pilhas_finais);
+    int demo = 1; // 0 - Jogo normal, 1 - Demonstraçao do final
+
+    // Jogo normal
+    if (!demo)
+    {
+        cartas = criar_cartas();
+        shuffle(cartas, 52);
+        gerar_colunas(cartas, colunas);
+        gerar_bolo_cave(cartas, cave);
+        gerar_pilhas_finais(pilhas_finais);
+    }
+    else
+    {
+        // FINAL
+        cartas = criar_cartas_final();
+        gerar_set_final(cartas, pilhas_finais);
+        gerar_colunas_final(cartas, colunas);
+    }
+
     char acao;
     int col, index, alvo;
     int u_cave;
-    limpaTela();
-    printLogo();
-    cout << "Gerando cartas..." << endl;
-    delay();
+    if (!demo)
+    {
+        limpaTela();
+        printLogo();
+        cout << "Gerando cartas..." << endl;
+        delay();
+    }
+
     while (1)
     {
         if (verificar_se_ganhou(pilhas_finais))
@@ -36,16 +56,26 @@ int main()
             break;
         }
 
-        limpaTela();
-        print_colunas(colunas);
-        apresentar_carta_cave(cave);
+        if (!demo)
+        {
+            limpaTela();
+            print_colunas(colunas, demo);
+            apresentar_carta_cave(cave);
+        }
+        else
+        {
+            print_coluna_final(colunas);
+
+            print_set_final(pilhas_finais);
+        }
+
         apresentar_pilhas_finais(pilhas_finais);
         print_acoes();
 
         cout << "Escreva: ";
         cin >> acao;
         limpaTela();
-        print_colunas(colunas);
+        print_colunas(colunas, demo);
         switch (acao)
         {
         case 'A':

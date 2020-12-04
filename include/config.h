@@ -206,8 +206,19 @@ void print_conteudo(stack<CARTAS> &coluna, int index)
     print_carta(seq, '\t');
 }
 
-void print_colunas(vector<stack<CARTAS>> &colunas)
+void print_colunas(vector<stack<CARTAS>> &colunas, int demo)
 {
+    if (demo)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            print_carta(visualizar_carta(colunas[i], 0), '\t');
+        }
+        cout << endl;
+        cout << endl;
+
+        return;
+    }
     for (int i = 0; i < 13; i++)
     {
         for (int j = 0; j < 7; j++)
