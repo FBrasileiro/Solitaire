@@ -193,8 +193,7 @@ CARTAS visualizar_carta(const stack<CARTAS> &coluna, int index)
     return seq[index];
 }
 
-template <typename T>
-void print_conteudo(stack<T> &coluna, int index)
+void print_conteudo(stack<CARTAS> &coluna, int index)
 {
     if (coluna.empty())
     {

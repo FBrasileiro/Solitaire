@@ -9,7 +9,7 @@
     }
 #define delay()            \
     {                      \
-        system("sleep 3"); \
+        system("sleep 2"); \
     }
 #define delay05()          \
     {                      \
